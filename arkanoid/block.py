@@ -18,8 +18,21 @@ class Block:
 
     def check_for_hit(self, ball):
 
-        if ball.center[0] > self.position[0] - ball.radius and ball.center[0] < self.position[0] \
+        if self.hits_to_dissaper > 0:
+            if ball.center[0] > self.position[0] - ball.radius and ball.center[0] < self.position[0] \
             and ball.center[1] > self.position[1] and ball.center[1] < self.position[1] + self.size[1]:
-            if self.hits_to_dissaper > 0:
                 self.hits_to_dissaper = self.hits_to_dissaper - 1
                 ball.move_vector[0] = -ball.move_vector[0]
+            if ball.center[0] > self.position[0] + self.size[0] and ball.center[0] < self.position[0]  + self.size[0] + ball.radius  \
+            and ball.center[1] > self.position[1] and ball.center[1] < self.position[1] + self.size[1]:
+                self.hits_to_dissaper = self.hits_to_dissaper - 1
+                ball.move_vector[0] = -ball.move_vector[0]
+            if ball.center[0] > self.position[0] and ball.center[0] < self.position[0] + self.size[0] \
+                and ball.center[1] < self.position[1] and  ball.center[1] > self.position[1] - ball.radius:
+                self.hits_to_dissaper = self.hits_to_dissaper - 1
+                ball.move_vector[1] = -ball.move_vector[1]
+            if ball.center[0] > self.position[0] and ball.center[0] < self.position[0] + self.size[0] \
+                and ball.center[1] > self.position[1] + self.size[1] and  ball.center[1] < self.position[1] + self.size[1] + ball.radius:
+                self.hits_to_dissaper = self.hits_to_dissaper - 1
+                ball.move_vector[1] = -ball.move_vector[1]
+
